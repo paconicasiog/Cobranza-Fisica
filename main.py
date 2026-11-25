@@ -9,8 +9,8 @@ from app.pdf_generator import generate_pdf
 from app.drive_integration import get_drive_service, create_drive_folder, upload_file_to_drive
 from app.utils import download_file
 
-# TODO: REPLACE WITH YOUR ACTUAL GOOGLE DRIVE MAIN FOLDER ID
-ROOT_DRIVE_FOLDER_ID = '0ACuChpZKhJIXUk9PVA'
+# ID de la carpeta raíz de Google Drive (variable de entorno)
+ROOT_DRIVE_FOLDER_ID = os.environ.get('ROOT_DRIVE_FOLDER_ID', '')
 
 def main():
     print("Iniciando processo de cobrança...")
@@ -21,7 +21,7 @@ def main():
     
     print("Trazendo os dados do CSV")
 
-    df_csv = pd.read_csv('/Users/francisconicasio/Desktop/Cobranza-Fisica/base_oficinas.csv')
+    df_csv = pd.read_csv(os.environ.get('BASE_OFICINAS_CSV', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'base_oficinas.csv')))
 
     print(f"Linhas do CSV: {len(df_csv)}\n")
 
